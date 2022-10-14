@@ -4,6 +4,8 @@ import styles from '~/styles/Home.module.css'
 import HashIcon from '../svgs/hash-icon.svg'
 import { NextAppPageProps } from '~/types/app'
 import Layout from '~/components/Layout'
+import { supabase } from '~/lib/supabaseClient'
+import { useEffect } from 'react'
 
 type IndexPageServerSideProps = {
   meta: {
@@ -12,6 +14,14 @@ type IndexPageServerSideProps = {
 }
 
 const IndexPage: NextPage<NextAppPageProps> = ({ meta }) => {
+  const getPosts = async () => {
+    const { data, error } = await supabase.from('posts').select('*')
+    console.log(data, error)
+  }
+
+  useEffect(() => {
+    getPosts()
+  }, [])
   return (
     <Layout>
       <div className={styles.container}>
