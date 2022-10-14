@@ -17,6 +17,7 @@ const IndexPage: NextPage<NextAppPageProps> = ({ meta }) => {
   const getPosts = async () => {
     const { data, error } = await supabase.from('posts').select('*')
     console.log(data, error)
+    console.log(data, error)
   }
 
   useEffect(() => {
